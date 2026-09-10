@@ -1,0 +1,837 @@
+[
+ {
+  "id": 84,
+  "old": "er / pol",
+  "new": "er/pol"
+ },
+ {
+  "id": 296,
+  "old": "tushlik qilmoq / kechki ovqatni yemoq",
+  "new": "tushlik qilmoq/kechki ovqatni yemoq"
+ },
+ {
+  "id": 627,
+  "old": "1) artikl (gramm.): 2) maqola",
+  "new": "1) artikl (gramm.); 2) maqola"
+ },
+ {
+  "id": 794,
+  "old": "telefon / qo'ng'iroq qilmoq",
+  "new": "telefon/qo'ng'iroq qilmoq"
+ },
+ {
+  "id": 976,
+  "old": "1) hosil olmoq; 2) chidamoq, dosh bermoq (1. terpet, viderjivat; 2",
+  "new": "1) hosil olmoq; 2) chidamoq, dosh bermoq"
+ },
+ {
+  "id": 979,
+  "old": "1) o'xshamoq; 2) tenglashtirmoq, tekislamoq (1. poxodit, bit poxojim; 2. viravnivat, rovnyat)",
+  "new": "1) o'xshamoq; 2) tenglashtirmoq, tekislamoq"
+ },
+ {
+  "id": 1033,
+  "old": "1) oyna; 2) stakan, ryumka (1) steklo 2) stakan; ryumka)",
+  "new": "1) oyna; 2) stakan, ryumka"
+ },
+ {
+  "id": 1055,
+  "old": "1) taklif; 2) yuklash ( 1) priglashenie; 2) pogruzka)",
+  "new": "1) taklif; 2) yuklash"
+ },
+ {
+  "id": 1148,
+  "old": "1) egallab olmoq; 2) dori qabul qilmoq (1) zanimat, okkupirovat; 2) prinimat (lekarstvo, pishu))",
+  "new": "1) egallab olmoq; 2) dori qabul qilmoq"
+ },
+ {
+  "id": 1220,
+  "old": "taniqli / mashhur shaxs",
+  "new": "taniqli/mashhur shaxs"
+ },
+ {
+  "id": 1323,
+  "old": "1) tanlamoq; 2) saylamoq, ovoz bermoq (1) vibirat 2) izbirat, vibirat; golosovat)",
+  "new": "1) tanlamoq; 2) saylamoq, ovoz bermoq"
+ },
+ {
+  "id": 1433,
+  "old": "ma'lumot / ko'rsatma / xabar bermoq",
+  "new": "ma'lumot/ko'rsatma/xabar bermoq"
+ },
+ {
+  "id": 1464,
+  "old": "1) tashkil qilmoq; 2) o'ziga kelmoq (1) sostavlyat; 2) vesti sebya)",
+  "new": "1) tashkil qilmoq; 2) o'ziga kelmoq"
+ },
+ {
+  "id": 1505,
+  "old": "1) xususiy; 2) aslida, haqiqatda (1) sobstvenniy; 2) na samom dele)",
+  "new": "1) xususiy; 2) aslida, haqiqatda"
+ },
+ {
+  "id": 1617,
+  "old": "tashimoq, yetkazib / eltib bermoq",
+  "new": "tashimoq, yetkazib/eltib bermoq"
+ },
+ {
+  "id": 1699,
+  "old": "gullar bilan qoplangan, bezatilgan 2) yashirin, sirli",
+  "new": "gullar bilan qoplangan, bezatilgan; 2) yashirin, sirli"
+ },
+ {
+  "id": 1795,
+  "old": "harbiy / ofitser",
+  "new": "harbiy/ofitser"
+ },
+ {
+  "id": 1804,
+  "old": "ikkinchi darajali ish / narsa, mayda-chuyda",
+  "new": "ikkinchi darajali ish/narsa, mayda-chuyda"
+ },
+ {
+  "id": 1878,
+  "old": "1) yondashmoq 2) qo'shilmoq, tutashmoq",
+  "new": "1) yondashmoq; 2) qo'shilmoq, tutashmoq"
+ },
+ {
+  "id": 1925,
+  "old": "1) reja tuzmoq, mo 'ljallab qo 'ymoq, rejalashtirmoq, 2) homilador bo 'lmoq, bo'yida bo'lmoq (konzipiert – o'ylangan, rejalashtirilgan)",
+  "new": "1) reja tuzmoq, mo'ljallab qo'ymoq, rejalashtirmoq; 2) homilador bo'lmoq, bo'yida bo'lmoq (konzipiert – o'ylangan, rejalashtirilgan)"
+ },
+ {
+  "id": 1927,
+  "old": "belgilamoq, belgi qo 'ymoq; ishora bildirmoq; ma'no anglatmoq",
+  "new": "belgilamoq, belgi qo'ymoq; ishora bildirmoq; ma'no anglatmoq"
+ },
+ {
+  "id": 1943,
+  "old": "bitiruv to 'g'risidagi guvohno ma , o 'rta ma 'lumotni tugatganligi to'g'risida attestat",
+  "new": "bitiruv to'g'risidagi guvohnoma, o'rta ma'lumotni tugatganligi to'g'risida attestat"
+ },
+ {
+  "id": 1946,
+  "old": "1) ruh, jon, arvoh, sharpa, ko 'lanka; 2) aql, fikrlash usuli; 3) ruhiyat (im gesunder Körper – gesunder Geist – sog' tanda – sog'lom aql (nemis xalq maqoli))",
+  "new": "1) ruh, jon, arvoh, sharpa, ko'lanka; 2) aql, fikrlash usuli; 3) ruhiyat (im gesunder Körper – gesunder Geist – sog' tanda – sog'lom aql (nemis xalq maqoli))"
+ },
+ {
+  "id": 1986,
+  "old": "talabalar ishlab chiqarish ta 'limi olib boriladigan korxona; o 'quv korxonasi, o'quv ustaxonasi",
+  "new": "talabalar ishlab chiqarish ta'limi olib boriladigan korxona; o'quv korxonasi, o'quv ustaxonasi"
+ },
+ {
+  "id": 2000,
+  "old": "dehqonchilikka, qishloq xo 'jaligiga oid",
+  "new": "dehqonchilikka, qishloq xo'jaligiga oid"
+ },
+ {
+  "id": 2049,
+  "old": "(tomiri bilan) sug 'urib tashlamoq, bartaraf qilmoq (entwurzelt – uzib tashlangan, aloqasi uzilgan)",
+  "new": "(tomiri bilan) sug'urib tashlamoq, bartaraf qilmoq (entwurzelt – uzib tashlangan, aloqasi uzilgan)"
+ },
+ {
+  "id": 2064,
+  "old": "1) jozibali 2) yoqimli (tashqi ko'rinishida)",
+  "new": "1) jozibali; 2) yoqimli (tashqi ko'rinishida)"
+ },
+ {
+  "id": 2081,
+  "old": "loyiq bo 'lmoq, to 'g'ri kelmoq, mos kelmoq",
+  "new": "loyiq bo'lmoq, to'g'ri kelmoq, mos kelmoq"
+ },
+ {
+  "id": 2101,
+  "old": "ta'riflab / tasvirlab bo'lmaydigan",
+  "new": "ta'riflab/tasvirlab bo'lmaydigan"
+ },
+ {
+  "id": 2102,
+  "old": "go'yo, xuddiki, ma 'lum bo 'lishicha, deyarli tak skazat, bir tarzda, ma 'lum darajada",
+  "new": "go'yo, xuddiki, ma'lum bo'lishicha, aytish mumkinki, bir tarzda, ma'lum darajada"
+ },
+ {
+  "id": 2119,
+  "old": "1) zich massa (yog'och) 2) qattiq modda tarkibi",
+  "new": "1) zich massa (yog'och); 2) qattiq modda tarkibi"
+ },
+ {
+  "id": 2122,
+  "old": "1) uchmoq 2) ko'z yugurtirib chiqmoq",
+  "new": "1) uchmoq; 2) ko'z yugurtirib chiqmoq"
+ },
+ {
+  "id": 2124,
+  "old": "1) oxirida, eng so'ngida, eng oxirida 2) oxir-oqibatda, 3)",
+  "new": "1) oxirida, eng so'ngida, eng oxirida; 2) oxir-oqibatda"
+ },
+ {
+  "id": 2125,
+  "old": "1) eng avvalo, avvaliga 2) ayni paytda 3) qisqa vaqt oldin",
+  "new": "1) eng avvalo, avvaliga; 2) ayni paytda; 3) qisqa vaqt oldin"
+ },
+ {
+  "id": 2129,
+  "old": "1) jihozlamoq, 2) ta'minlamoq",
+  "new": "1) jihozlamoq; 2) ta'minlamoq"
+ },
+ {
+  "id": 2133,
+  "old": "1) g'am, g'ussa, qayg'u, hasrat, umidsizlik 2) qayg'uli voqea, baxtsiz hodisa",
+  "new": "1) g'am, g'ussa, qayg'u, hasrat, umidsizlik; 2) qayg'uli voqea, baxtsiz hodisa"
+ },
+ {
+  "id": 2137,
+  "old": "1) tayyorlash (taom) 2) yarashtirish; tashkil etish",
+  "new": "1) tayyorlash (taom); 2) yarashtirish; tashkil etish"
+ },
+ {
+  "id": 2161,
+  "old": "tortinib turmoq, o 'zini orqaga tortmoq; uzoqlashmoq",
+  "new": "tortinib turmoq, o'zini orqaga tortmoq; uzoqlashmoq"
+ },
+ {
+  "id": 2169,
+  "old": "zakon o kreditnoy sisteme; zakon o kreditnix operatsiyax",
+  "new": "kredit tizimi to'g'risidagi qonun"
+ },
+ {
+  "id": 2171,
+  "old": "ish / mehnat sharoitlari",
+  "new": "ish/mehnat sharoitlari"
+ },
+ {
+  "id": 2181,
+  "old": "tashlab ketmoq, qoldirmoq; o 'tkazib yubormoq",
+  "new": "tashlab ketmoq, qoldirmoq; o'tkazib yubormoq"
+ },
+ {
+  "id": 2357,
+  "old": "maslahat / konsultatsiya bermoq",
+  "new": "maslahat/konsultatsiya bermoq"
+ },
+ {
+  "id": 2377,
+  "old": "mas'uliyatni / javobgarlikni bo'yniga olmoq",
+  "new": "mas'uliyatni/javobgarlikni bo'yniga olmoq"
+ },
+ {
+  "id": 2379,
+  "old": "javobgar / mas'ul shaxs",
+  "new": "javobgar/mas'ul shaxs"
+ },
+ {
+  "id": 2438,
+  "old": "mazax / masxara qilmoq, kulgu ko'tarmoq",
+  "new": "mazax/masxara qilmoq, kulgu ko'tarmoq"
+ },
+ {
+  "id": 2446,
+  "old": "(ayrim tovushlarni, mas. „S“ni) buzib gapirmoq",
+  "new": "(ayrim tovushlarni, mas. «S»ni) buzib gapirmoq"
+ },
+ {
+  "id": 2496,
+  "old": "1) saqlamoq, himoya qilmoq ( Gott bewahre! – Xudo saqlasin!) 2) o 'zini saqlamoq, saqlanmoq",
+  "new": "1) saqlamoq, himoya qilmoq (Gott bewahre! – Xudo saqlasin!); 2) o'zini saqlamoq, saqlanmoq"
+ },
+ {
+  "id": 2497,
+  "old": "1) to 'g'riligini isbotlamoq (tasdiqlamoq); 2) sich bewahrheiten – o'zini oqlamoq",
+  "new": "1) to'g'riligini isbotlamoq (tasdiqlamoq); 2) sich bewahrheiten – o'zini oqlamoq"
+ },
+ {
+  "id": 2499,
+  "old": "1) tasdiqlash, tasdiq; 2) sinov, imtihon; ( Freilassung auf Bewährung – qamoqdan shartli ozod qilish)",
+  "new": "1) tasdiqlash, tasdiq; 2) sinov, imtihon; (Freilassung auf Bewährung – qamoqdan shartli ozod qilish)"
+ },
+ {
+  "id": 2527,
+  "old": "1) belgilamoq, belgi / nishon / tamg 'a qo 'ymoq; 2) xarakterlamoq, tavsiflamoq",
+  "new": "1) belgilamoq, belgi/nishon/tamg'a qo'ymoq; 2) xarakterlamoq, tavsiflamoq"
+ },
+ {
+  "id": 2554,
+  "old": "1) qo 'lida ushlab turmoq, tutib turmoq. 2) (kimnidir qo 'yib yubormasdan mahkam) ushlab turmoq. 3) kimgadir bog'lanib qolmoq. sich halten – suyanib qolmoq",
+  "new": "1) qo'lida ushlab turmoq, tutib turmoq; 2) (kimnidir qo'yib yubormasdan mahkam) ushlab turmoq; 3) kimgadir bog'lanib qolmoq. sich halten – suyanib qolmoq"
+ },
+ {
+  "id": 2557,
+  "old": "1) qoplamoq, o 'ramoq. 2) soliqqa tortmoq. 3) xonani egallamoq, yollamoq. 4) isbotlamoq, dalil keltirmoq",
+  "new": "1) qoplamoq, o'ramoq; 2) soliqqa tortmoq; 3) xonani egallamoq, yollamoq; 4) isbotlamoq, dalil keltirmoq"
+ },
+ {
+  "id": 2558,
+  "old": "1) surilgan. 2) band qilingan, egallangan",
+  "new": "1) surilgan; 2) band qilingan, egallangan"
+ },
+ {
+  "id": 2581,
+  "old": "1) adv. faqat, nuqul. 2) adj. maxsus, alohida, ayrim, o'ziga xos",
+  "new": "1) adv. faqat, nuqul; 2) adj. maxsus, alohida, ayrim, o'ziga xos"
+ },
+ {
+  "id": 2585,
+  "old": "1) kekchi, gina saqlovchi, o 'ch oluvchi. 2) natijasida hosil bo 'luvchi, ergashuvchi",
+  "new": "1) kekchi, gina saqlovchi, o'ch oluvchi; 2) natijasida hosil bo'luvchi, ergashuvchi"
+ },
+ {
+  "id": 2720,
+  "old": "1) qulflamoq, yopmoq, ichkaridan qulflab olmoq 2) (asirlikda) tutib turmoq",
+  "new": "1) qulflamoq, yopmoq, ichkaridan qulflab olmoq; 2) (asirlikda) tutib turmoq"
+ },
+ {
+  "id": 2769,
+  "old": "suvga sho'ng'ish / botish",
+  "new": "suvga sho'ng'ish/botish"
+ },
+ {
+  "id": 2800,
+  "old": "1) ko'chirmoq, ko'chirib olib kelmoq. 2) ko'chib kelmoq",
+  "new": "1) ko'chirmoq, ko'chirib olib kelmoq; 2) ko'chib kelmoq"
+ },
+ {
+  "id": 2815,
+  "old": "(har xil radioaktiv moddalar, ximiyaviy moddalar, og 'ir moddalar bilan) tuproqning zararlanishi, ifloslanishi",
+  "new": "(har xil radioaktiv moddalar, ximiyaviy moddalar, og'ir moddalar bilan) tuproqning zararlanishi, ifloslanishi"
+ },
+ {
+  "id": 2829,
+  "old": "1) qayta buzish, demontaj, 2) ko 'payish, kengayish; 3) rivojlanish, takomillashish",
+  "new": "1) qayta buzish, demontaj; 2) ko'payish, kengayish; 3) rivojlanish, takomillashish"
+ },
+ {
+  "id": 2830,
+  "old": "diqqatsiz, e 'tiborsiz, pala -partish; betartib; shaltoq, mas 'uliyatsiz, sovuqqon, iltifotsiz",
+  "new": "diqqatsiz, e'tiborsiz, pala-partish; betartib; shaltoq, mas'uliyatsiz, sovuqqon, iltifotsiz"
+ },
+ {
+  "id": 2844,
+  "old": "1) taraq -turuq ovoz, qichqiriq, shovqin. 2) janjal, mojaro (Krach machen – mojaro qilmoq, janjallashmoq, shovqin-suron solmoq)",
+  "new": "1) taraq -turuq ovoz, qichqiriq, shovqin; 2) janjal, mojaro (Krach machen – mojaro qilmoq, janjallashmoq, shovqin-suron solmoq)"
+ },
+ {
+  "id": 2845,
+  "old": "hovliqish, mashmasha, to'polon, yugur-yugur, tartibsizlik, „ko'tarilish“",
+  "new": "hovliqish, mashmasha, to'polon, yugur-yugur, tartibsizlik, «ko'tarilish»"
+ },
+ {
+  "id": 2864,
+  "old": "urmoq, zarba bermoq, kaltaklamoq ; urib sindirmoq; o'ldirmoq",
+  "new": "urmoq, zarba bermoq, kaltaklamoq; urib sindirmoq; o'ldirmoq"
+ },
+ {
+  "id": 2865,
+  "old": "1) zarba, turtki, turtish, tepki 2) siltash, to'qnashuv 3) impuls, zarba pulsi",
+  "new": "1) zarba, turtki, turtish, tepki; 2) siltash, to'qnashuv; 3) impuls, zarba pulsi"
+ },
+ {
+  "id": 2874,
+  "old": "kirib bo 'lmaydigan, o 'tib bo 'lmaydigan, yo 'lab bo'lmaydigan, kirishmaydigan",
+  "new": "kirib bo'lmaydigan, o'tib bo'lmaydigan, yo'lab bo'lmaydigan, kirishmaydigan"
+ },
+ {
+  "id": 2885,
+  "old": "1) hukmronlik qilmoq, buyurmoq, buyruq bermoq; buyurtma/ko'rsatma bermoq (nimadir haqid a); qaror qilmoq ; 2) ~ über+Akk. ixtiyorida bo 'lmoq ( biron bir narsa ), ega bo'lmoq (nimagadir)",
+  "new": "1) hukmronlik qilmoq, buyurmoq, buyruq bermoq; buyurtma/ko'rsatma bermoq (nimadir haqida); qaror qilmoq; 2) ~ über+Akk. ixtiyorida bo'lmoq (biron bir narsa), ega bo'lmoq (nimagadir)"
+ },
+ {
+  "id": 2889,
+  "old": "tartibga soluvchi / ma'muriy",
+  "new": "tartibga soluvchi/ma'muriy"
+ },
+ {
+  "id": 2894,
+  "old": "1) nishonga urish nuqtasi (otish paytida) 2) uchrashuv joyi; yig'ish punkti",
+  "new": "1) nishonga urish nuqtasi (otish paytida); 2) uchrashuv joyi; yig'ish punkti"
+ },
+ {
+  "id": 2896,
+  "old": "1) nafis, yupqa, nozik, mazali/ ajoyib (ta'm). 2) a'lo, zavqli 3) qimmatbaho",
+  "new": "1) nafis, yupqa, nozik, mazali/ajoyib (ta'm); 2) a'lo, zavqli; 3) qimmatbaho"
+ },
+ {
+  "id": 2898,
+  "old": "1) (balandga) ko'tarilmoq, ustun turmoq; kirgizmoq 2) ajralib turmoq, farq qilmoq",
+  "new": "1) (balandga) ko'tarilmoq, ustun turmoq; kirgizmoq; 2) ajralib turmoq, farq qilmoq"
+ },
+ {
+  "id": 2903,
+  "old": "1) tartibli, belgilangan tartibda 2) munosib, halol, pokiza, saranjom, sarishta",
+  "new": "1) tartibli, belgilangan tartibda; 2) munosib, halol, pokiza, saranjom, sarishta"
+ },
+ {
+  "id": 2905,
+  "old": "1) ustiga qo'ymoq. 2) kiymoq, taqmoq, taqib qo'ymoq. 3) barpo etmoq",
+  "new": "1) ustiga qo'ymoq; 2) kiymoq, taqmoq, taqib qo'ymoq; 3) barpo etmoq"
+ },
+ {
+  "id": 2908,
+  "old": "1) qurmoq, barpo qilmoq 2) bunyod qilmoq, tiklamoq 3) ko'paytirmoq",
+  "new": "1) qurmoq, barpo qilmoq; 2) bunyod qilmoq, tiklamoq; 3) ko'paytirmoq"
+ },
+ {
+  "id": 2930,
+  "old": "1) harakatsiz, qotib qolgan. 2) qattiq, dag'al, qo'pol. 3) kuchli",
+  "new": "1) harakatsiz, qotib qolgan; 2) qattiq, dag'al, qo'pol; 3) kuchli"
+ },
+ {
+  "id": 2931,
+  "old": "1) chuqur. 2) jiddiy, puxta. 3) juda kuchli",
+  "new": "1) chuqur; 2) jiddiy, puxta; 3) juda kuchli"
+ },
+ {
+  "id": 2946,
+  "old": "1) muomala, munosabat. 2) davolash",
+  "new": "1) muomala, munosabat; 2) davolash"
+ },
+ {
+  "id": 2947,
+  "old": "1) tovushni o 'chirish, hushini yo 'qotish, o 'zini bilmaslik. 2) og'riqsizlantirish. 3) behushlik, narkoz (holati)",
+  "new": "1) tovushni o'chirish, hushini yo'qotish, o'zini bilmaslik; 2) og'riqsizlantirish; 3) behushlik, narkoz (holati)"
+ },
+ {
+  "id": 2949,
+  "old": "1) plombalamoq. 2) muhr qo 'ymoq (den Zahn plombieren – tishni plombalamoq/ tishga plomba qo'ydirmoq",
+  "new": "1) plombalamoq; 2) muhr qo'ymoq (den Zahn plombieren – tishni plombalamoq/tishga plomba qo'ydirmoq"
+ },
+ {
+  "id": 2961,
+  "old": "1) cho'zilib ketmoq, ushlanib qolmoq 2) to'xtalib qolmoq",
+  "new": "1) cho'zilib ketmoq, ushlanib qolmoq; 2) to'xtalib qolmoq"
+ },
+ {
+  "id": 2962,
+  "old": "1) boqmoq, qaramoq, ozuqa bermoq. 2) yemish bermoq, oziqlantirmoq, yordam bermoq (oilaga)",
+  "new": "1) boqmoq, qaramoq, ozuqa bermoq; 2) yemish bermoq, oziqlantirmoq, yordam bermoq (oilaga)"
+ },
+ {
+  "id": 2963,
+  "old": "1) ovqatlanmoq. 2) ozuqa yemoq (sich kümmerlich ernähren – g'amxo'rlik bilan ozuqlantirmoq, boqmoq )",
+  "new": "1) ovqatlanmoq; 2) ozuqa yemoq (sich kümmerlich ernähren – g'amxo'rlik bilan ozuqlantirmoq, boqmoq)"
+ },
+ {
+  "id": 2971,
+  "old": "1) namuna, ko'chirma (obrazets) 2) farmoyish, qoida, nizom (ustav)",
+  "new": "1) namuna, ko'chirma; 2) farmoyish, qoida, nizom"
+ },
+ {
+  "id": 2976,
+  "old": "1) qatnashmoq, tashrif buyurmoq, 2) xuruj, xujum. 3 ) boshidan kechirmoq, o'tqazmoq (ein Erdbeben hat das Land heimgesucht. – Yurtda zilzila sodir bo'ldi.)",
+  "new": "1) qatnashmoq, tashrif buyurmoq; 2) xuruj, xujum. 3) boshidan kechirmoq, o'tqazmoq (ein Erdbeben hat das Land heimgesucht. – Yurtda zilzila sodir bo'ldi.)"
+ },
+ {
+  "id": 2979,
+  "old": "1) bog'liqlik bo'lmoq, o'zaro bog'lanmoq 2) aloqada bo'lmoq",
+  "new": "1) bog'liqlik bo'lmoq, o'zaro bog'lanmoq; 2) aloqada bo'lmoq"
+ },
+ {
+  "id": 2984,
+  "old": "yomon ishlamoq, buzib qo 'ymoq, ishdan chiqarmoq, buzmoq",
+  "new": "yomon ishlamoq, buzib qo'ymoq, ishdan chiqarmoq, buzmoq"
+ },
+ {
+  "id": 2988,
+  "old": "1) ta'sir qilmoq, ta'sir ko'rsatmoq, tuyulmoq, ijod qilmoq 2) ishlamoq",
+  "new": "1) ta'sir qilmoq, ta'sir ko'rsatmoq, tuyulmoq, ijod qilmoq; 2) ishlamoq"
+ },
+ {
+  "id": 2989,
+  "old": "1) ta'sir, ta'sir qilish 2) resultat, natija, oqibat, effekt",
+  "new": "1) ta'sir, ta'sir qilish; 2) resultat, natija, oqibat, effekt"
+ },
+ {
+  "id": 2991,
+  "old": "1) tortishish kuchi 2) o'ziga tortish, jalb qilish",
+  "new": "1) tortishish kuchi; 2) o'ziga tortish, jalb qilish"
+ },
+ {
+  "id": 2998,
+  "old": "1) keskinlik 2) qizg'inlik, g'ayrat 3) diqqat-e'tibor 4) kuchlanish (fizika)",
+  "new": "1) keskinlik; 2) qizg'inlik, g'ayrat; 3) diqqat-e'tibor; 4) kuchlanish (fizika)"
+ },
+ {
+  "id": 2999,
+  "old": "1) harakatga keltirmoq, ishlatib yubormoq (mexanizm) 2) ozod qilmoq, bo'shatmoq 3) ta'sir ko'rsatmoq",
+  "new": "1) harakatga keltirmoq, ishlatib yubormoq (mexanizm); 2) ozod qilmoq, bo'shatmoq; 3) ta'sir ko'rsatmoq"
+ },
+ {
+  "id": 3018,
+  "old": "1) ko'chmas mulk 2) qimirlamaslik, siljimaslik",
+  "new": "1) ko'chmas mulk; 2) qimirlamaslik, siljimaslik"
+ },
+ {
+  "id": 3021,
+  "old": "1) taassurot 2) belgi, alomat, nishona, iz",
+  "new": "1) taassurot; 2) belgi, alomat, nishona, iz"
+ },
+ {
+  "id": 3039,
+  "old": "1) mazmun, mohiyat 2) tarkib 3) sig'im",
+  "new": "1) mazmun, mohiyat; 2) tarkib; 3) sig'im"
+ },
+ {
+  "id": 3042,
+  "old": "1) aniq/qat 'iy gapirmoq, tasdiqlamoq 2) bayonet bermoq, tasdiqlamoq 3) o'rnatmoq, aniqlamoq",
+  "new": "1) aniq/qat'iy gapirmoq, tasdiqlamoq; 2) bayonot bermoq, tasdiqlamoq; 3) o'rnatmoq, aniqlamoq"
+ },
+ {
+  "id": 3043,
+  "old": "sinov / imtihon natijalari",
+  "new": "sinov/imtihon natijalari"
+ },
+ {
+  "id": 3045,
+  "old": "1) yordamchi mablag', vosita 2) yordamchi / qo'shimcha komponent",
+  "new": "1) yordamchi mablag', vosita; 2) yordamchi/qo'shimcha komponent"
+ },
+ {
+  "id": 3046,
+  "old": "1) (bir tomonlama) shartnomadan voz kechish , shartnomani bekor qilish 2) vazifasidan ketish, iste'foga chiqish (masalan, hukumat, vazir)",
+  "new": "1) (bir tomonlama) shartnomadan voz kechish, shartnomani bekor qilish; 2) vazifasidan ketish, iste'foga chiqish (masalan, hukumat, vazir)"
+ },
+ {
+  "id": 3054,
+  "old": "g'azablanmoq, g 'azabga minmoq, darg 'azab bo 'lmoq, tutoqib ketmoq, jazavasi tutmoq",
+  "new": "g'azablanmoq, g'azabga minmoq, darg'azab bo'lmoq, tutoqib ketmoq, jazavasi tutmoq"
+ },
+ {
+  "id": 3059,
+  "old": "I. bo'rtib chiqmoq, yastanib turmoq II. 1) har narsadan ustun turmoq, kuchlilik qilmoq; ustunlik qilmoq 2) oshib ketmoq (kimdandir biron bir narsada)",
+  "new": "I. bo'rtib chiqmoq, yastanib turmoq II. 1) har narsadan ustun turmoq, kuchlilik qilmoq; ustunlik qilmoq; 2) oshib ketmoq (kimdandir biron bir narsada)"
+ },
+ {
+  "id": 3062,
+  "old": "1) hayratga solmoq, lol qoldirmoq 2) (kutilmaganda) ustidan chiqmoq, g'aflatda qoldirmoq",
+  "new": "1) hayratga solmoq, lol qoldirmoq; 2) (kutilmaganda) ustidan chiqmoq, g'aflatda qoldirmoq"
+ },
+ {
+  "id": 3064,
+  "old": "1) hayrat, ajablanish 2) kutilmagan hodisa, jarayon, narsa",
+  "new": "1) hayrat, ajablanish; 2) kutilmagan hodisa, jarayon, narsa"
+ },
+ {
+  "id": 3065,
+  "old": "1) tilini tiymoq, tilga ehtiyot bo 'lmoq, ushlab turmoq 2) e'tiroz bildirmoq, ziddiyatga/qarama-qarshilikka bormoq 3) chog'ishtirmoq, taqqoslamoq, qiyoslamoq",
+  "new": "1) tilini tiymoq, tilga ehtiyot bo'lmoq, ushlab turmoq; 2) e'tiroz bildirmoq, ziddiyatga/qarama-qarshilikka bormoq; 3) chog'ishtirmoq, taqqoslamoq, qiyoslamoq"
+ },
+ {
+  "id": 3066,
+  "old": "1) qarama-qarshi qo'ymoq 2) qarshilik ko'rsatmoq, qarshilik qilmoq",
+  "new": "1) qarama-qarshi qo'ymoq; 2) qarshilik ko'rsatmoq, qarshilik qilmoq"
+ },
+ {
+  "id": 3068,
+  "old": "1) qarama-qarshi qo'ymoq 2) qarshilik ko 'rsatmoq, qarshilik qilmoq",
+  "new": "1) qarama-qarshi qo'ymoq; 2) qarshilik ko'rsatmoq, qarshilik qilmoq"
+ },
+ {
+  "id": 3069,
+  "old": "qarshilik ko 'rsatmoq, qarshilik qilmoq",
+  "new": "qarshilik ko'rsatmoq, qarshilik qilmoq"
+ },
+ {
+  "id": 3070,
+  "old": "1) zarar/ziyon/shikast yetkazmoq 2) qoidani/ kelishuvni / buzmoq",
+  "new": "1) zarar/ziyon/shikast yetkazmoq; 2) qoidani/kelishuvni/buzmoq"
+ },
+ {
+  "id": 3072,
+  "old": "1) jabrlanuvchi 2) yarador, jarohatlangan kishi",
+  "new": "1) jabrlanuvchi; 2) yarador, jarohatlangan kishi"
+ },
+ {
+  "id": 3073,
+  "old": "1) yara, jarohat, yaralanish (travma), zarar 2) buzish (qonun, shartnoma, chegara) 3) haqorat qilish (Verletzung der Amtspflicht – xizmat burchini buzish/suiste 'mol qilish) (Verletzung der Wehrpflicht – harbiy majburiyatni buzish)",
+  "new": "1) yara, jarohat, yaralanish (travma), zarar; 2) buzish (qonun, shartnoma, chegara); 3) haqorat qilish (Verletzung der Amtspflicht – xizmat burchini buzish/suiste'mol qilish) (Verletzung der Wehrpflicht – harbiy majburiyatni buzish)"
+ },
+ {
+  "id": 3074,
+  "old": "1) o'rinbosar; ijrochi (direktor), vazifa bajaruvchi 2) vakil",
+  "new": "1) o'rinbosar; ijrochi (direktor), vazifa bajaruvchi; 2) vakil"
+ },
+ {
+  "id": 3075,
+  "old": "Avstriyada federal hukuma t yerining boshlig 'i",
+  "new": "Avstriyada federal hukumat yerining boshlig'i"
+ },
+ {
+  "id": 3084,
+  "old": "1) tirjaymoq, tishining oqini ko 'rsatmoq, irjaymoq, ishshaymoq, mazax qilmoq",
+  "new": "1) tirjaymoq, tishining oqini ko'rsatmoq, irjaymoq, ishshaymoq, mazax qilmoq"
+ },
+ {
+  "id": 3086,
+  "old": "1) zorlanib yig'lamoq, ko'z yoshi to'kmoq 2) g'inshimoq, ingillamoq (it)",
+  "new": "1) zorlanib yig'lamoq, ko'z yoshi to'kmoq; 2) g'inshimoq, ingillamoq (it)"
+ },
+ {
+  "id": 3089,
+  "old": "1) baland (ovozda) baqirib yig 'lamoq, qattiq qayg 'urmoq, g'am bilan ado bo'lmoq",
+  "new": "1) baland (ovozda) baqirib yig'lamoq, qattiq qayg'urmoq, g'am bilan ado bo'lmoq"
+ },
+ {
+  "id": 3116,
+  "old": "1) yo'l, avtomagistral, avtomagistral, magistral yo'l 2) suv yo'li",
+  "new": "1) yo'l, avtomagistral, avtomagistral, magistral yo'l; 2) suv yo'li"
+ },
+ {
+  "id": 3121,
+  "old": "avj / kulminatsiya nuqtasiga yetmoq",
+  "new": "avj/kulminatsiya nuqtasiga yetmoq"
+ },
+ {
+  "id": 3133,
+  "old": "1) surmoq, siljitmoq 2) turtmoq, itarmoq 3) suqmoq 4) (muddatni) cho 'zmoq 5) ishni orqaga surmoq",
+  "new": "1) surmoq, siljitmoq; 2) turtmoq, itarmoq; 3) suqmoq; 4) (muddatni) cho'zmoq; 5) ishni orqaga surmoq"
+ },
+ {
+  "id": 3135,
+  "old": "1) biror narsani to 'xtatmoq, oldini olm oq, o'tkazib yubormaslik, to 'sqinlik qilmoq 2) ehtiyot chorasini ko'rmoq, tadbir o'tkazmoq",
+  "new": "1) biror narsani to'xtatmoq, oldini olmoq, o'tkazib yubormaslik, to'sqinlik qilmoq; 2) ehtiyot chorasini ko'rmoq, tadbir o'tkazmoq"
+ },
+ {
+  "id": 3137,
+  "old": "ko'rib olmoq, qarab olmoq 2) anglamoq, tan olmoq (o'z xatosini), e'tirof etmoq",
+  "new": "ko'rib olmoq, qarab olmoq; 2) anglamoq, tan olmoq (o'z xatosini), e'tirof etmoq"
+ },
+ {
+  "id": 3139,
+  "old": "1) ariza (nimagadir), iltimosnoma 2) ariza (OTMga kirish uchun)",
+  "new": "1) ariza (nimagadir), iltimosnoma; 2) ariza (OTMga kirish uchun)"
+ },
+ {
+  "id": 3145,
+  "old": "tashqariga, tashqariga qarab yo 'nalganlikni belgilashda, …dan",
+  "new": "tashqariga, tashqariga qarab yo'nalganlikni belgilashda, …dan"
+ },
+ {
+  "id": 3147,
+  "old": "1) har tomonlama tekshirmoq, tekshiruv o'tkazmoq 2) tergov qilmoq",
+  "new": "1) har tomonlama tekshirmoq, tekshiruv o'tkazmoq; 2) tergov qilmoq"
+ },
+ {
+  "id": 3180,
+  "old": "1) she'riy, nasriy to'plam 2) kalendar, taqvim",
+  "new": "1) she'riy, nasriy to'plam; 2) kalendar, taqvim"
+ },
+ {
+  "id": 3183,
+  "old": "1) ekin ekmoq (o'stirmoq, yetishtirmoq) 2) qurmoq (yoniga)",
+  "new": "1) ekin ekmoq (o'stirmoq, yetishtirmoq); 2) qurmoq (yoniga)"
+ },
+ {
+  "id": 3232,
+  "old": "1) ichiga qo'ymoq, o'rnatmoq; 2) topshiriq bermoq 3) qo'llamoq ( als",
+  "new": "1) ichiga qo'ymoq, o'rnatmoq; 2) topshiriq bermoq; 3) qo'llamoq (als"
+ },
+ {
+  "id": 3273,
+  "old": "1) yo'l ko'rsatmoq, yo'lga qo'ymoq 2) kirish qilmoq, boshlamoq (chiqishni)",
+  "new": "1) yo'l ko'rsatmoq, yo'lga qo'ymoq; 2) kirish qilmoq, boshlamoq (chiqishni)"
+ },
+ {
+  "id": 3275,
+  "old": "1) kirish, boshlash 2) ochish",
+  "new": "1) kirish, boshlash; 2) ochish"
+ },
+ {
+  "id": 3280,
+  "old": "ekspressivlik kuchi 2) yuz (ifoda) qobiliyati",
+  "new": "ekspressivlik kuchi; 2) yuz (ifoda) qobiliyati"
+ },
+ {
+  "id": 3284,
+  "old": "1) oldindan belgilamoq 2) (bo'lmagan voqeani) ta'kidlamoq",
+  "new": "1) oldindan belgilamoq; 2) (bo'lmagan voqeani) ta'kidlamoq"
+ },
+ {
+  "id": 3289,
+  "old": "1) (sahnaga, so'zga) chiqmoq, ijro etmoq 2) o'zini tutmoq",
+  "new": "1) (sahnaga, so'zga) chiqmoq, ijro etmoq; 2) o'zini tutmoq"
+ },
+ {
+  "id": 3297,
+  "old": "1) mol-mulk, boylik 2) ko'nikma, imkoniyat",
+  "new": "1) mol-mulk, boylik; 2) ko'nikma, imkoniyat"
+ },
+ {
+  "id": 3299,
+  "old": "1) tanimoq, bilmoq 2) farqlamoq",
+  "new": "1) tanimoq, bilmoq; 2) farqlamoq"
+ },
+ {
+  "id": 3307,
+  "old": "1) taqdim qilmoq 2) bajarmoq, qanoatlantirmoq 3) imkon bermoq",
+  "new": "1) taqdim qilmoq; 2) bajarmoq, qanoatlantirmoq; 3) imkon bermoq"
+ },
+ {
+  "id": 3311,
+  "old": "1) olib chiqib ketish 2) chekinish, orqaga qaytish (qo'shin)",
+  "new": "1) olib chiqib ketish; 2) chekinish, orqaga qaytish (qo'shin)"
+ },
+ {
+  "id": 3312,
+  "old": "1) ko'chish 2) asardan parcha",
+  "new": "1) ko'chish; 2) asardan parcha"
+ },
+ {
+  "id": 3313,
+  "old": "1) tantanali kirib kelish 2) ko'chib kirish 3) boshlanish",
+  "new": "1) tantanali kirib kelish; 2) ko'chib kirish; 3) boshlanish"
+ },
+ {
+  "id": 3314,
+  "old": "1) qo'shimcha poyezd 2) afzallik, imtiyoz",
+  "new": "1) qo'shimcha poyezd; 2) afzallik, imtiyoz"
+ },
+ {
+  "id": 3315,
+  "old": "1) kelib qo'shilish 2) ro'yxatdan o'tishga ruxsat 3) ko'c hib ketish, immigratsiya 4) to'lish",
+  "new": "1) kelib qo'shilish; 2) ro'yxatdan o'tishga ruxsat; 3) ko'chib ketish, immigratsiya; 4) to'lish"
+ },
+ {
+  "id": 3317,
+  "old": "1) ko'chib o'tish (yangi uyga) 2) namoyishkorona (tantanali) yurish",
+  "new": "1) ko'chib o'tish (yangi uyga); 2) namoyishkorona (tantanali) yurish"
+ },
+ {
+  "id": 3318,
+  "old": "1) haddan tashqari, benihoya 2) noma'qul, to'g'ri kelmaydigan, noloyiq",
+  "new": "1) haddan tashqari, benihoya; 2) noma'qul, to'g'ri kelmaydigan, noloyiq"
+ },
+ {
+  "id": 3320,
+  "old": "1) (qazilma boylikka oid) qo'l urilmagan, mo'l 2) daxlsiz, qonun himoyasida 3) gard tegmagan, beg'ubor",
+  "new": "1) (qazilma boylikka oid) qo'l urilmagan, mo'l; 2) daxlsiz, qonun himoyasida; 3) gard tegmagan, beg'ubor"
+ },
+ {
+  "id": 3321,
+  "old": "mustahkam, baquvvat, zabt etib bo'lmas 2) rad qilib bo'lmas, e'tiroz qilib bo'lmaydigan",
+  "new": "mustahkam, baquvvat, zabt etib bo'lmas; 2) rad qilib bo'lmas, e'tiroz qilib bo'lmaydigan"
+ },
+ {
+  "id": 3326,
+  "old": "1) daxlsiz 2) benuqson, qusursiz, bekam-ko'st",
+  "new": "1) daxlsiz; 2) benuqson, qusursiz, bekam-ko'st"
+ },
+ {
+  "id": 3337,
+  "old": "1) to'xtatib bo'lmas 2) cheksiz, poyoni yo'q",
+  "new": "1) to'xtatib bo'lmas; 2) cheksiz, poyoni yo'q"
+ },
+ {
+  "id": 3347,
+  "old": "1) (biror baxtsiz hodisaning) aybdori bo'lmoq 2) qarzga botmoq",
+  "new": "1) (biror baxtsiz hodisaning) aybdori bo'lmoq; 2) qarzga botmoq"
+ },
+ {
+  "id": 3348,
+  "old": "1) ayb, xato 2) qarzga botish, qarzdorlik",
+  "new": "1) ayb, xato; 2) qarzga botish, qarzdorlik"
+ },
+ {
+  "id": 3349,
+  "old": "1) sepib yubormoq 2) ko'mib yubormoq",
+  "new": "1) sepib yubormoq; 2) ko'mib yubormoq"
+ },
+ {
+  "id": 3357,
+  "old": "1) ta'minlamoq 2) bajarmoq (sich versehen – 1) g'amlamoq ( ozuqa) 2) xato qilmoq, yanglishmoq)",
+  "new": "1) ta'minlamoq; 2) bajarmoq (sich versehen – 1) g'amlamoq (ozuqa); 2) xato qilmoq, yanglishmoq)"
+ },
+ {
+  "id": 3360,
+  "old": "1. cho'ktirish 2) ma'naviy ko'milish, berilish",
+  "new": "1. cho'ktirish; 2) ma'naviy ko'milish, berilish"
+ },
+ {
+  "id": 3361,
+  "old": "1) ko'chirmoq, o'zgartirmoq 2) zarba b ermoq ( sich versetzen – o'zini birovning o'rniga qo'ymoq)",
+  "new": "1) ko'chirmoq, o'zgartirmoq; 2) zarba bermoq (sich versetzen – o'zini birovning o'rniga qo'ymoq)"
+ },
+ {
+  "id": 3362,
+  "old": "1) ko'chirish 2) garovga qo'yish 3) joylashtirish",
+  "new": "1) ko'chirish; 2) garovga qo'yish; 3) joylashtirish"
+ },
+ {
+  "id": 3388,
+  "old": "1) ko'chirib yozmoq, ko'chirmoq 2) (kelishuvni) qaytarib olmoq, bekor qilmoq",
+  "new": "1) ko'chirib yozmoq, ko'chirmoq; 2) (kelishuvni) qaytarib olmoq, bekor qilmoq"
+ },
+ {
+  "id": 3424,
+  "old": "1) tezlashmoq, tezlikni oshirmoq, jadallashmoq 2) shirtirlatmo q, g'uvillamoq, g'o'ng'illamoq",
+  "new": "1) tezlashmoq, tezlikni oshirmoq, jadallashmoq; 2) shirtirlatmo q, g'uvillamoq, g'o'ng'illamoq"
+ },
+ {
+  "id": 3440,
+  "old": "1) kir (yuviladigan) kiyimlar 2) yuvish",
+  "new": "1) kir (yuviladigan) kiyimlar; 2) yuvish"
+ },
+ {
+  "id": 3460,
+  "old": "1) jild, tom 2) lenta, tasma 3) rishta, bog'ich, ip",
+  "new": "1) jild, tom; 2) lenta, tasma; 3) rishta, bog'ich, ip"
+ },
+ {
+  "id": 3475,
+  "old": "1) hamjihatlik 2) kelishuv, to'xtam (in Einklang bringen – bir to'xtamga kelmoq, rozi bo'lmoq)",
+  "new": "1) hamjihatlik; 2) kelishuv, to'xtam (in Einklang bringen – bir to'xtamga kelmoq, rozi bo'lmoq)"
+ },
+ {
+  "id": 3507,
+  "old": "I. boshqa joyga qo'ymoq, o'zgartirmoq, moslamoq ; II. sezdirmasdan o'rab olmoq",
+  "new": "I. boshqa joyga qo'ymoq, o'zgartirmoq, moslamoq; II. sezdirmasdan o'rab olmoq"
+ },
+ {
+  "id": 3684,
+  "old": "1) qimirlatmoq 2) aralashtirmoq 3) tegmoq, qo'l urmoq",
+  "new": "1) qimirlatmoq; 2) aralashtirmoq; 3) tegmoq, qo'l urmoq"
+ },
+ {
+  "id": 3914,
+  "old": "sohalar aro / fanlararo",
+  "new": "sohalar aro/fanlararo"
+ },
+ {
+  "id": 3917,
+  "old": "ta'sir doirasi / sohasi",
+  "new": "ta'sir doirasi/sohasi"
+ },
+ {
+  "id": 3997,
+  "old": "qisqacha doklad, qisqa chiqish / ma'ruza qilish",
+  "new": "qisqacha doklad, qisqa chiqish/ma'ruza qilish"
+ },
+ {
+  "id": 3998,
+  "old": "munozara / bahsda qatnashish",
+  "new": "munozara/bahsda qatnashish"
+ },
+ {
+  "id": 4052,
+  "old": "xafa / haqorat qilmoq",
+  "new": "xafa/haqorat qilmoq"
+ },
+ {
+  "id": 4063,
+  "old": "biror narsaga yengiltaklik bilan / bepisandlik qaramoq",
+  "new": "biror narsaga yengiltaklik bilan/bepisandlik qaramoq"
+ },
+ {
+  "id": 4070,
+  "old": "sezilarli, muhim , ahamiyatli, asosiy",
+  "new": "sezilarli, muhim, ahamiyatli, asosiy"
+ },
+ {
+  "id": 4120,
+  "old": "joniga qas d qilish, o 'zini o'zi o'ldirish",
+  "new": "joniga qasd qilish, o'zini o'zi o'ldirish"
+ },
+ {
+  "id": 4368,
+  "old": "shartnoma bo 'yicha majburiyatlarni bajarmoq",
+  "new": "shartnoma bo'yicha majburiyatlarni bajarmoq"
+ }
+]

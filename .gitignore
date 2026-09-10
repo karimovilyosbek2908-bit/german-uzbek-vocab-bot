@@ -1,0 +1,26 @@
+# Maxfiy sozlamalar
+.env
+
+# SQLite ma'lumotlar bazasi fayllari
+*.db
+*.sqlite
+*.sqlite3
+
+# Runtime (run.sh)
+bot.log
+bot.pid
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Muharrir / OS
+.vscode/
+.idea/
+.DS_Store
+
+# Uchinchi tomon kurs materiali (katta binar, words.json ga ajratilgan)
+data/*.pdf
