@@ -38,6 +38,7 @@ from telegram.ext import (
 
 import database as db
 import srs
+from srs import Rating
 
 logging.basicConfig(
     format="%(asctime)s %(levelname)s %(name)s — %(message)s",
@@ -179,8 +180,10 @@ async def _render_current(update_or_query, context: ContextTypes.DEFAULT_TYPE) -
         text = _card_text(word, idx, total, session["revealed"])
         if session["revealed"]:
             kb = [[
-                InlineKeyboardButton("✅ Bildim", callback_data="ans:1"),
-                InlineKeyboardButton("❌ Bilmadim", callback_data="ans:0"),
+                InlineKeyboardButton("🔴 Qayta", callback_data=f"ans:{int(Rating.Again)}"),
+                InlineKeyboardButton("🟠 Qiyin", callback_data=f"ans:{int(Rating.Hard)}"),
+                InlineKeyboardButton("🟢 Yaxshi", callback_data=f"ans:{int(Rating.Good)}"),
+                InlineKeyboardButton("🔵 Oson", callback_data=f"ans:{int(Rating.Easy)}"),
             ]]
         else:
             kb = [[InlineKeyboardButton("👁 Javobni ko'rish", callback_data="reveal")]]
@@ -230,8 +233,10 @@ HELP_TEXT = (
     "/stats — o'rganish statistikasi\n"
     "/help — shu yordam\n\n"
     "Pastdagi tugmalardan ham foydalanishingiz mumkin. "
-    f"Har sessiyada {SESSION_SIZE} tagacha so'z. Takrorlash Leitner tizimi "
-    "bo'yicha rejalashtiriladi (to'g'ri javob — oraliq uzayadi, xato — 1-boxga qaytadi)."
+    f"Har sessiyada {SESSION_SIZE} tagacha so'z. Takrorlash FSRS algoritmi "
+    "bo'yicha rejalashtiriladi — har so'z uchun aynan unutishga yaqin "
+    "vaqtda eslatadi, ortiqcha takrorlarga vaqt sarflamaydi. Kartochkada "
+    "javobni baholang: 🔴 Qayta / 🟠 Qiyin / 🟢 Yaxshi / 🔵 Oson."
 )
 
 
@@ -303,21 +308,29 @@ async def cmd_takror(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None
         await _render_current(update, context)
 
 
+_STATE_UZ = {
+    "new": "🆕 Yangi",
+    "learning": "📖 O'rganilmoqda",
+    "review": "🔁 Takrorlanmoqda",
+    "relearning": "🔄 Qayta o'rganilmoqda",
+}
+
+
 async def cmd_stats(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     user = update.effective_user
     db.ensure_user(user.id, user.username, user.first_name)
     s = db.get_stats(user.id)
     bars = "\n".join(
-        f"  Box {b}: {'▮' * min(s['by_box'][b], 20) or '·'} {s['by_box'][b]}"
-        for b in range(1, 6)
+        f"  {label}: {'▮' * min(s['by_state'][key], 20) or '·'} {s['by_state'][key]}"
+        for key, label in _STATE_UZ.items()
     )
     await update.effective_chat.send_message(
         f"📊 <b>Statistika</b>\n\n"
         f"So'zlar bazasi: {s['total_words']}\n"
         f"Boshlangan: {s['started']}\n"
-        f"O'zlashtirilgan (Box 5): {s['mastered']}\n"
+        f"Uzoq muddatga o'zlashtirilgan: {s['mastered']}\n"
         f"Bugun takrorlash: {s['due']}\n\n"
-        f"<b>Box taqsimoti</b>\n{bars}\n\n"
+        f"<b>FSRS holati</b>\n{bars}\n\n"
         f"Javoblar: ✅ {s['correct']} / ❌ {s['wrong']}  (aniqlik {s['accuracy']}%)",
         parse_mode=ParseMode.HTML,
     )
@@ -350,8 +363,9 @@ async def on_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
         return
 
     if data.startswith("ans:"):
-        correct = data == "ans:1"
-        _apply_answer(user_id, word, correct)
+        rating = Rating(int(data.split(":", 1)[1]))
+        correct = rating != Rating.Again
+        _apply_answer(user_id, word, rating)
         session["correct" if correct else "wrong"] += 1
         session["pos"] += 1
         session["revealed"] = False
@@ -361,9 +375,9 @@ async def on_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
     if data.startswith("opt:"):
         chosen_id = int(data.split(":", 1)[1])
         correct = chosen_id == word["id"]
-        _apply_answer(user_id, word, correct)
+        rating = Rating.Good if correct else Rating.Again
+        _apply_answer(user_id, word, rating)
         session["correct" if correct else "wrong"] += 1
-        mark = "✅ To'g'ri!" if correct else f"❌ Noto'g'ri. To'g'ri javob: <b>{word['uz']}</b>"
         await query.answer(
             "To'g'ri!" if correct else f"Noto'g'ri — {word['uz']}", show_alert=not correct
         )
@@ -373,19 +387,29 @@ async def on_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
         return
 
 
-def _apply_answer(user_id: int, word: dict, correct: bool) -> None:
-    """Leitner holatini hisoblab, bazaga yozadi."""
+def _apply_answer(user_id: int, word: dict, rating: Rating) -> None:
+    """FSRS holatini hisoblab, bazaga yozadi."""
     prev = db.get_progress(user_id, word["id"])
-    box = prev["box"] if prev else 0
+    correct = rating != Rating.Again
     cc = prev["correct_count"] if prev else 0
     wc = prev["wrong_count"] if prev else 0
-    res = srs.review(correct=correct, box=box, correct_count=cc, wrong_count=wc)
+    res = srs.review(
+        rating,
+        state=prev["state"] if prev else None,
+        step=prev["step"] if prev else None,
+        stability=prev["stability"] if prev else None,
+        difficulty=prev["difficulty"] if prev else None,
+        last_review=prev["last_review"] if prev else None,
+    )
     db.upsert_progress(
         user_id,
         word["id"],
-        box=res.box,
-        correct_count=res.correct_count,
-        wrong_count=res.wrong_count,
+        state=res.state,
+        step=res.step,
+        stability=res.stability,
+        difficulty=res.difficulty,
+        correct_count=cc + (1 if correct else 0),
+        wrong_count=wc + (0 if correct else 1),
         next_review=res.next_review,
         last_review=res.last_review,
     )

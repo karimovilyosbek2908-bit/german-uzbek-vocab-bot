@@ -2,8 +2,8 @@
 
 Nemis–o'zbek so'z boyligini oshirish uchun Telegram bot. ~4370 ta nemis so'zini
 («100 kun qoidasi» kursidan olingan, A1–B1) kartochka (flashcard) va test
-o'yinlari orqali, Leitner (spaced repetition) tizimi asosida takrorlash bilan
-o'rgatadi.
+o'yinlari orqali, FSRS (Free Spaced Repetition Scheduler) algoritmi asosida
+takrorlash bilan o'rgatadi.
 
 ## Texnik stack
 
@@ -20,7 +20,7 @@ Termux'da ishlashga moslangan — og'ir kutubxonalar ishlatilmaydi.
 german-uzbek-vocab-bot/
 ├── bot.py            # asosiy fayl, handler'lar
 ├── database.py       # SQLite funksiyalari
-├── srs.py            # Leitner algoritmi
+├── srs.py            # FSRS algoritmi
 ├── data/words.json   # so'zlar bazasi
 ├── .env              # BOT_TOKEN (gitignore'da)
 ├── requirements.txt
@@ -122,12 +122,31 @@ systemd xizmati: [`deploy/vocab-bot.service`](deploy/vocab-bot.service).
 
 Har sessiyada 10 tagacha so'z beriladi (`bot.py` → `SESSION_SIZE`).
 
-## Leitner (SRS) tizimi
+## FSRS (spaced repetition) tizimi
 
-Har bir so'z 1–5 «box»da bo'ladi. Box oraliqlari: 1→1 kun, 2→2, 3→4, 4→7,
-5→15 kun. To'g'ri javob so'zni bir box yuqoriga ko'taradi, xato javob 1-boxga
-qaytaradi. `get_due_words` avval umuman o'rganilmagan so'zlarni, so'ng muddati
-kelganlarini (box'i pasti oldin) beradi.
+`srs.py` — rasmiy [`py-fsrs`](https://github.com/open-spaced-repetition/py-fsrs)
+kutubxonasi ustiga yupqa qatlam. Har bir so'z uchun ikkita parametr
+saqlanadi: **stability** (barqarorlik — necha kunda eslab qolish ehtimoli
+~90% dan pastga tushishi) va **difficulty** (qiyinlik). Keyingi takrorlash
+sanasi shu ikkitasidan hisoblanadi — Leitner'dagi kabi qattiq box oraliqlari
+yo'q, har so'z o'zining unutish egri chizig'iga moslashadi.
+
+Kartochka rejimida javobni 4 darajada baholaysiz: 🔴 Qayta (butunlay
+unutilgan) / 🟠 Qiyin (to'g'ri, qiynalib) / 🟢 Yaxshi (to'g'ri, normal) /
+🔵 Oson (to'g'ri, juda oson). Test rejimida javob avtomatik Yaxshi/Qayta'ga
+moslanadi (variantli testda oraliq baho yo'q).
+
+Bot bir kunlik sessiyalar bilan ishlagani uchun FSRS'ning daqiqalik
+learning/relearning bosqichlari o'chirilgan (`learning_steps=()`) — har javob
+to'g'ridan-to'g'ri kunlik Review holatiga o'tadi. `get_due_words` avval
+umuman o'rganilmagan so'zlarni, so'ng muddati kelganlarini (eng eski
+muddat oldin) beradi.
+
+> Eslatma: eski Leitner (`box`) ustuni bazada saqlanib qoladi, lekin
+> ishlatilmaydi — `database.py`dagi migratsiya uni FSRS ustunlariga
+> (`state`, `step`, `stability`, `difficulty`) avtomatik kengaytiradi.
+> Mavjud progress (to'g'ri/xato hisoblari, keyingi takrorlash sanasi)
+> yo'qolmaydi, faqat keyingi javobda FSRS undan qaytadan boshlaydi.
 
 ## So'zlar bazasi
 

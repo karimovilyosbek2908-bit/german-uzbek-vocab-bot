@@ -3,7 +3,7 @@
 Uch jadval:
   * users    — Telegram foydalanuvchilari
   * words    — so'zlar bazasi (data/words.json dan yuklanadi)
-  * progress — har bir (foydalanuvchi, so'z) juftligi uchun Leitner holati
+  * progress — har bir (foydalanuvchi, so'z) juftligi uchun FSRS holati
 
 Funksiyalar sinxron (sqlite3). Shaxsiy bot uchun yuk kichik, shuning uchun
 bot.py ularni to'g'ridan-to'g'ri chaqiradi. Har bir chaqiruvda yangi ulanish
@@ -43,7 +43,10 @@ CREATE TABLE IF NOT EXISTS words (
 CREATE TABLE IF NOT EXISTS progress (
     user_id       INTEGER NOT NULL REFERENCES users(user_id),
     word_id       INTEGER NOT NULL REFERENCES words(id),
-    box           INTEGER NOT NULL DEFAULT 1,
+    state         INTEGER,             -- FSRS: 1=Learning,2=Review,3=Relearning; NULL=hali ko'rilmagan
+    step          INTEGER,
+    stability     REAL,
+    difficulty    REAL,
     correct_count INTEGER NOT NULL DEFAULT 0,
     wrong_count   INTEGER NOT NULL DEFAULT 0,
     next_review   TEXT NOT NULL,
@@ -54,6 +57,27 @@ CREATE TABLE IF NOT EXISTS progress (
 CREATE INDEX IF NOT EXISTS idx_progress_due
     ON progress(user_id, next_review);
 """
+
+# Eski (Leitner) sxemadan FSRS'ga o'tish uchun qo'shiladigan ustunlar.
+# `box` ustuni saqlab qolinadi (o'chirilmaydi) — eski qatorlar shunchaki
+# state=NULL bilan "hali ko'rilmagan" deb qayta boshlanadi, keyingi javobda
+# FSRS ularni qaytadan initsializatsiya qiladi. Ma'lumot yo'qolmaydi, faqat
+# eski box progressi FSRS statistikasiga aylanmaydi.
+_PROGRESS_MIGRATION_COLUMNS = (
+    ("state", "INTEGER"),
+    ("step", "INTEGER"),
+    ("stability", "REAL"),
+    ("difficulty", "REAL"),
+)
+
+
+def _migrate_progress_table(conn: sqlite3.Connection) -> None:
+    cols = {row["name"] for row in conn.execute("PRAGMA table_info(progress)").fetchall()}
+    if not cols:
+        return  # jadval hali yaratilmagan (yangi baza) — SCHEMA to'g'ridan-to'g'ri to'g'ri yaratadi
+    for name, coltype in _PROGRESS_MIGRATION_COLUMNS:
+        if name not in cols:
+            conn.execute(f"ALTER TABLE progress ADD COLUMN {name} {coltype}")
 
 
 # --------------------------------------------------------------------------- #
@@ -76,6 +100,7 @@ def init_db(db_path: str | os.PathLike[str] | None = None) -> None:
     """Jadvallarni yaratadi (agar mavjud bo'lmasa) va so'zlarni yuklaydi."""
     with get_connection(db_path) as conn:
         conn.executescript(SCHEMA)
+        _migrate_progress_table(conn)
     load_words(db_path=db_path)
 
 
@@ -186,28 +211,46 @@ def get_progress(
 def upsert_progress(
     user_id: int,
     word_id: int,
-    box: int,
+    state: int,
+    step: int | None,
+    stability: float,
+    difficulty: float,
     correct_count: int,
     wrong_count: int,
     next_review: str,
     last_review: str,
     db_path: str | os.PathLike[str] | None = None,
 ) -> None:
-    """Leitner holatini yozadi (mavjud bo'lsa yangilaydi)."""
+    """FSRS holatini yozadi (mavjud bo'lsa yangilaydi)."""
     with get_connection(db_path) as conn:
         conn.execute(
             """
             INSERT INTO progress
-                (user_id, word_id, box, correct_count, wrong_count, next_review, last_review)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
+                (user_id, word_id, state, step, stability, difficulty,
+                 correct_count, wrong_count, next_review, last_review)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             ON CONFLICT(user_id, word_id) DO UPDATE SET
-                box           = excluded.box,
+                state         = excluded.state,
+                step          = excluded.step,
+                stability     = excluded.stability,
+                difficulty    = excluded.difficulty,
                 correct_count = excluded.correct_count,
                 wrong_count   = excluded.wrong_count,
                 next_review   = excluded.next_review,
                 last_review   = excluded.last_review
             """,
-            (user_id, word_id, box, correct_count, wrong_count, next_review, last_review),
+            (
+                user_id,
+                word_id,
+                state,
+                step,
+                stability,
+                difficulty,
+                correct_count,
+                wrong_count,
+                next_review,
+                last_review,
+            ),
         )
 
 
@@ -219,9 +262,9 @@ def get_due_words(
 ) -> list[dict[str, Any]]:
     """Takrorlash vaqti kelgan so'zlarni qaytaradi.
 
-    Tartib (Leitner mantig'i):
-      1. AVVAL muddati kelgan takrorlar (next_review <= bugun) — box'i pasti
-         (ya'ni qiyinroq), so'ng eng ko'p kutgani oldin.
+    Tartib (FSRS mantig'i):
+      1. AVVAL muddati kelgan takrorlar (next_review <= bugun) — eng ko'p
+         kutgani (eng eski muddat) oldin.
       2. Keyin — hali o'rganilmagan yangi so'zlar (id bo'yicha).
     Shunda muddati o'tgan takrorlar minglab yangi so'z ortida ko'milib qolmaydi.
     """
@@ -230,8 +273,12 @@ def get_due_words(
         rows = conn.execute(
             """
             SELECT w.*,
-                   COALESCE(p.box, 0)            AS box,
+                   p.state                       AS state,
+                   p.step                        AS step,
+                   p.stability                   AS stability,
+                   p.difficulty                  AS difficulty,
                    p.next_review                 AS next_review,
+                   p.last_review                 AS last_review,
                    COALESCE(p.correct_count, 0)  AS correct_count,
                    COALESCE(p.wrong_count, 0)    AS wrong_count
             FROM words w
@@ -240,7 +287,6 @@ def get_due_words(
             WHERE p.word_id IS NULL
                OR p.next_review <= ?
             ORDER BY (p.word_id IS NULL),                 -- 0 = takror, 1 = yangi
-                     COALESCE(p.box, 0),                  -- past box oldin
                      COALESCE(p.next_review, '9999-99'),  -- eng eski muddat oldin
                      w.id
             LIMIT ?
@@ -250,29 +296,42 @@ def get_due_words(
     return [dict(r) for r in rows]
 
 
+# FSRS State: 1=Learning, 2=Review, 3=Relearning (database.py'da state=NULL -> "yangi")
+_STATE_LABELS = {1: "learning", 2: "review", 3: "relearning"}
+# Review holatida shu darajadagi barqarorlik (kun) — "uzoq muddatga o'zlashtirilgan" chegarasi
+MASTERED_STABILITY_DAYS = 21
+
+
 def get_stats(
     user_id: int,
     today: str | None = None,
     db_path: str | os.PathLike[str] | None = None,
 ) -> dict[str, Any]:
-    """Foydalanuvchi statistikasi: box taqsimoti, jami, muddati kelgan, aniqlik."""
+    """Foydalanuvchi statistikasi: FSRS holat taqsimoti, jami, muddati kelgan, aniqlik."""
     today = today or date.today().isoformat()
     with get_connection(db_path) as conn:
         total_words = conn.execute("SELECT COUNT(*) FROM words").fetchone()[0]
 
-        box_rows = conn.execute(
-            "SELECT box, COUNT(*) AS n FROM progress WHERE user_id = ? GROUP BY box",
+        state_rows = conn.execute(
+            "SELECT state, COUNT(*) AS n FROM progress WHERE user_id = ? GROUP BY state",
             (user_id,),
         ).fetchall()
-        by_box = {b: 0 for b in range(1, 6)}
-        for r in box_rows:
-            by_box[r["box"]] = r["n"]
+        by_state = {"new": 0, "learning": 0, "review": 0, "relearning": 0}
+        for r in state_rows:
+            by_state[_STATE_LABELS.get(r["state"], "new")] += r["n"]
 
         started = conn.execute(
             "SELECT COUNT(*) FROM progress WHERE user_id = ?", (user_id,)
         ).fetchone()[0]
+        by_state["new"] += total_words - started
 
-        mastered = by_box[5]
+        mastered = conn.execute(
+            """
+            SELECT COUNT(*) FROM progress
+            WHERE user_id = ? AND state = 2 AND stability >= ?
+            """,
+            (user_id, MASTERED_STABILITY_DAYS),
+        ).fetchone()[0]
 
         due = conn.execute(
             "SELECT COUNT(*) FROM progress WHERE user_id = ? AND next_review <= ?",
@@ -299,7 +358,7 @@ def get_stats(
         "not_started": total_words - started,
         "mastered": mastered,
         "due": due,
-        "by_box": by_box,
+        "by_state": by_state,
         "correct": agg["c"],
         "wrong": agg["w"],
         "accuracy": accuracy,

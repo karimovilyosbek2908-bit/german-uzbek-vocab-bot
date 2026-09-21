@@ -1,5 +1,6 @@
 # Asosiy kutubxonalar — Termux uchun yengil, qo'shimcha C-kengaytmalarsiz
 python-telegram-bot>=20.7,<23   # async Telegram bot API (v20+), faqat httpx ga bog'liq
 python-dotenv>=1.0.1            # .env fayldan BOT_TOKEN o'qish
+fsrs>=6.0,<7                    # FSRS spaced-repetition algoritmi, sof Python
 
 # SQLite Python standart kutubxonasida bor — alohida o'rnatish shart emas
