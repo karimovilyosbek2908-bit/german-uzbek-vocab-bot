@@ -117,10 +117,24 @@ systemd xizmati: [`deploy/vocab-bot.service`](deploy/vocab-bot.service).
 | `/flashcard` | Kartochka sessiyasi: so'zni ko'r → javobni och → «Bildim / Bilmadim» |
 | `/test` | Variantli test: 4 ta javobdan to'g'risini tanlash |
 | `/takror` | Bugun takrorlanadigan so'zlar soni + kartochka sessiyasi |
-| `/stats` | Box taqsimoti, o'zlashtirilgan so'zlar, aniqlik foizi |
+| `/stats` | FSRS taqsimoti, so'z turkumi va kun bo'yicha guruh statistikasi, aniqlik foizi |
 | `/help` | Buyruqlar ro'yxati |
 
 Har sessiyada 10 tagacha so'z beriladi (`bot.py` → `SESSION_SIZE`).
+
+### Guruh bo'yicha mashq
+
+`/flashcard` va `/test`ga argument qo'shib, faqat bitta guruhni mashq qilish
+mumkin:
+
+- So'z turkumi: `/flashcard ot`, `/flashcard fe'l`, `/test sifat`, `/test olmosh`
+- Kun oralig'i («100 kun qoidasi» kursidagi kun, 1–100): `/flashcard 1-10`,
+  `/test 45`
+
+Filtrlash faqat `SESSION_SIZE` ta so'zni tanlaydigan sessiya doirasida
+ishlaydi — FSRS jadvali (avval muddati o'tgan takrorlar, so'ng yangi so'zlar)
+guruh ichida ham saqlanadi. Guruhlarning jami/boshlangan taqsimoti
+`/stats`da ko'rinadi.
 
 ## FSRS (spaced repetition) tizimi
 

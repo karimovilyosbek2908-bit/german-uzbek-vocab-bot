@@ -36,6 +36,7 @@ CREATE TABLE IF NOT EXISTS words (
     de          TEXT NOT NULL,
     uz          TEXT NOT NULL,
     pos         TEXT,
+    day         INTEGER,
     example_de  TEXT,
     example_uz  TEXT
 );
@@ -80,6 +81,14 @@ def _migrate_progress_table(conn: sqlite3.Connection) -> None:
             conn.execute(f"ALTER TABLE progress ADD COLUMN {name} {coltype}")
 
 
+def _migrate_words_table(conn: sqlite3.Connection) -> None:
+    cols = {row["name"] for row in conn.execute("PRAGMA table_info(words)").fetchall()}
+    if not cols:
+        return  # jadval hali yaratilmagan — SCHEMA to'g'ridan-to'g'ri to'g'ri yaratadi
+    if "day" not in cols:
+        conn.execute("ALTER TABLE words ADD COLUMN day INTEGER")
+
+
 # --------------------------------------------------------------------------- #
 #  Ulanish va sxema
 # --------------------------------------------------------------------------- #
@@ -101,6 +110,7 @@ def init_db(db_path: str | os.PathLike[str] | None = None) -> None:
     with get_connection(db_path) as conn:
         conn.executescript(SCHEMA)
         _migrate_progress_table(conn)
+        _migrate_words_table(conn)
     load_words(db_path=db_path)
 
 
@@ -126,6 +136,7 @@ def load_words(
             w["de"],
             w["uz"],
             w.get("pos"),
+            w.get("day"),
             w.get("example_de"),
             w.get("example_uz"),
         )
@@ -135,12 +146,13 @@ def load_words(
     with get_connection(db_path) as conn:
         conn.executemany(
             """
-            INSERT INTO words (id, de, uz, pos, example_de, example_uz)
-            VALUES (?, ?, ?, ?, ?, ?)
+            INSERT INTO words (id, de, uz, pos, day, example_de, example_uz)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
             ON CONFLICT(id) DO UPDATE SET
                 de         = excluded.de,
                 uz         = excluded.uz,
                 pos        = excluded.pos,
+                day        = excluded.day,
                 example_de = excluded.example_de,
                 example_uz = excluded.example_uz
             """,
@@ -258,6 +270,9 @@ def get_due_words(
     user_id: int,
     limit: int = 10,
     today: str | None = None,
+    pos: str | None = None,
+    day_from: int | None = None,
+    day_to: int | None = None,
     db_path: str | os.PathLike[str] | None = None,
 ) -> list[dict[str, Any]]:
     """Takrorlash vaqti kelgan so'zlarni qaytaradi.
@@ -267,11 +282,26 @@ def get_due_words(
          kutgani (eng eski muddat) oldin.
       2. Keyin — hali o'rganilmagan yangi so'zlar (id bo'yicha).
     Shunda muddati o'tgan takrorlar minglab yangi so'z ortida ko'milib qolmaydi.
+
+    `pos` — so'z turkumi bo'yicha filtr ("noun"/"verb"/"adj"/"pron").
+    `day_from`/`day_to` — «100 kun qoidasi» kursidagi kun oralig'i bo'yicha filtr.
     """
     today = today or date.today().isoformat()
+    where = ["(p.word_id IS NULL OR p.next_review <= ?)"]
+    params: list[Any] = [today]
+    if pos is not None:
+        where.append("w.pos = ?")
+        params.append(pos)
+    if day_from is not None:
+        where.append("w.day >= ?")
+        params.append(day_from)
+    if day_to is not None:
+        where.append("w.day <= ?")
+        params.append(day_to)
+
     with get_connection(db_path) as conn:
         rows = conn.execute(
-            """
+            f"""
             SELECT w.*,
                    p.state                       AS state,
                    p.step                        AS step,
@@ -284,14 +314,13 @@ def get_due_words(
             FROM words w
             LEFT JOIN progress p
                    ON p.word_id = w.id AND p.user_id = ?
-            WHERE p.word_id IS NULL
-               OR p.next_review <= ?
+            WHERE {' AND '.join(where)}
             ORDER BY (p.word_id IS NULL),                 -- 0 = takror, 1 = yangi
                      COALESCE(p.next_review, '9999-99'),  -- eng eski muddat oldin
                      w.id
             LIMIT ?
             """,
-            (user_id, today, limit),
+            (user_id, *params, limit),
         ).fetchall()
     return [dict(r) for r in rows]
 
@@ -363,6 +392,55 @@ def get_stats(
         "wrong": agg["w"],
         "accuracy": accuracy,
     }
+
+
+DAY_BLOCK_SIZE = 10  # /stats'da kunlarni shuncha kunlik bloklarga birlashtiramiz
+
+
+def get_group_stats(
+    user_id: int,
+    db_path: str | os.PathLike[str] | None = None,
+) -> dict[str, Any]:
+    """So'z turkumi (pos) va kun blokiga bo'lingan taqsimot: jami/boshlangan.
+
+    Boshlangan — foydalanuvchida shu so'z uchun progress yozuvi bor (kamida
+    bir marta ko'rilgan/mashq qilingan).
+    """
+    with get_connection(db_path) as conn:
+        pos_rows = conn.execute(
+            """
+            SELECT COALESCE(NULLIF(w.pos, ''), '?')       AS pos,
+                   COUNT(*)                                AS total,
+                   SUM(CASE WHEN p.word_id IS NOT NULL THEN 1 ELSE 0 END) AS started
+            FROM words w
+            LEFT JOIN progress p ON p.word_id = w.id AND p.user_id = ?
+            GROUP BY pos
+            ORDER BY total DESC
+            """,
+            (user_id,),
+        ).fetchall()
+
+        day_rows = conn.execute(
+            """
+            SELECT (COALESCE(w.day, 1) - 1) / ?              AS block,
+                   COUNT(*)                                   AS total,
+                   SUM(CASE WHEN p.word_id IS NOT NULL THEN 1 ELSE 0 END) AS started
+            FROM words w
+            LEFT JOIN progress p ON p.word_id = w.id AND p.user_id = ?
+            GROUP BY block
+            ORDER BY block
+            """,
+            (DAY_BLOCK_SIZE, user_id),
+        ).fetchall()
+
+    by_pos = {r["pos"]: {"total": r["total"], "started": r["started"]} for r in pos_rows}
+    by_day_block = {}
+    for r in day_rows:
+        lo = r["block"] * DAY_BLOCK_SIZE + 1
+        hi = lo + DAY_BLOCK_SIZE - 1
+        by_day_block[f"{lo}-{hi}"] = {"total": r["total"], "started": r["started"]}
+
+    return {"by_pos": by_pos, "by_day_block": by_day_block}
 
 
 # --------------------------------------------------------------------------- #

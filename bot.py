@@ -17,6 +17,7 @@ from __future__ import annotations
 import logging
 import os
 import random
+import re
 
 from dotenv import load_dotenv
 from telegram import (
@@ -61,8 +62,8 @@ MAIN_KB = ReplyKeyboardMarkup(
 
 # Telegram buyruqlar menyusi ("/" tugmasi)
 BOT_COMMANDS = [
-    BotCommand("flashcard", "Kartochka sessiyasi"),
-    BotCommand("test", "Variantli test"),
+    BotCommand("flashcard", "Kartochka sessiyasi (guruh: /flashcard fe'l)"),
+    BotCommand("test", "Variantli test (guruh: /test 1-10)"),
     BotCommand("takror", "Bugun takrorlanadigan so'zlar"),
     BotCommand("stats", "O'rganish statistikasi"),
     BotCommand("help", "Yordam"),
@@ -80,6 +81,36 @@ def _pos_uz(pos: str | None) -> str:
         "adv": "ravish",
         "pron": "olmosh",
     }.get(pos or "", pos or "")
+
+
+# /flashcard va /test'ga guruh bo'yicha filtr argumenti sifatida berish mumkin
+# bo'lgan so'z turkumi nomlari (o'zbekcha va inglizcha kod).
+_POS_ALIASES = {
+    "ot": "noun", "otlar": "noun", "noun": "noun",
+    "fe'l": "verb", "fel": "verb", "feil": "verb", "fe'llar": "verb", "verb": "verb",
+    "sifat": "adj", "sifatlar": "adj", "adj": "adj",
+    "olmosh": "pron", "olmoshlar": "pron", "pron": "pron",
+}
+_DAY_RANGE_RE = re.compile(r"^(\d{1,3})(?:-(\d{1,3}))?$")
+
+
+def _parse_group_arg(arg: str) -> tuple[str | None, int | None, int | None]:
+    """Filtr argumentini (pos, day_from, day_to) ga aylantiradi.
+
+    Masalan: "fe'l" -> ("verb", None, None); "1-10" -> (None, 1, 10);
+    "5" -> (None, 5, 5). Noma'lum argument uchun ValueError ko'taradi.
+    """
+    normalized = arg.strip().lower().replace("’", "'").replace("`", "'")
+    if normalized in _POS_ALIASES:
+        return _POS_ALIASES[normalized], None, None
+    m = _DAY_RANGE_RE.match(normalized)
+    if m:
+        lo = int(m.group(1))
+        hi = int(m.group(2)) if m.group(2) else lo
+        if lo > hi:
+            lo, hi = hi, lo
+        return None, lo, hi
+    raise ValueError(arg)
 
 
 def _short_uz(uz: str, limit: int = 40) -> str:
@@ -139,8 +170,17 @@ def db_all_words() -> list[dict]:
 # --------------------------------------------------------------------------- #
 #  Sessiya boshqaruvi
 # --------------------------------------------------------------------------- #
-def _start_session(context: ContextTypes.DEFAULT_TYPE, user_id: int, mode: str) -> dict | None:
-    due = db.get_due_words(user_id, limit=SESSION_SIZE)
+def _start_session(
+    context: ContextTypes.DEFAULT_TYPE,
+    user_id: int,
+    mode: str,
+    pos: str | None = None,
+    day_from: int | None = None,
+    day_to: int | None = None,
+) -> dict | None:
+    due = db.get_due_words(
+        user_id, limit=SESSION_SIZE, pos=pos, day_from=day_from, day_to=day_to
+    )
     if not due:
         return None
     session = {
@@ -236,7 +276,13 @@ HELP_TEXT = (
     f"Har sessiyada {SESSION_SIZE} tagacha so'z. Takrorlash FSRS algoritmi "
     "bo'yicha rejalashtiriladi — har so'z uchun aynan unutishga yaqin "
     "vaqtda eslatadi, ortiqcha takrorlarga vaqt sarflamaydi. Kartochkada "
-    "javobni baholang: 🔴 Qayta / 🟠 Qiyin / 🟢 Yaxshi / 🔵 Oson."
+    "javobni baholang: 🔴 Qayta / 🟠 Qiyin / 🟢 Yaxshi / 🔵 Oson.\n\n"
+    "<b>Guruh bo'yicha mashq</b>\n"
+    "/flashcard yoki /test ga so'z turkumi (<code>ot</code>, <code>fe'l</code>, "
+    "<code>sifat</code>, <code>olmosh</code>) yoki kun oralig'i "
+    "(<code>1-10</code>, <code>45</code>) qo'shing, masalan "
+    "<code>/flashcard fe'l</code>, <code>/test 1-10</code>. Taqsimotni "
+    "/stats'da ko'rasiz."
 )
 
 
@@ -270,13 +316,38 @@ async def on_text(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         await handler(update, context)
 
 
+GROUP_ARG_HELP = (
+    "Guruh nomini tushunmadim. Quyidagilardan birini yozing:\n"
+    "• so'z turkumi — <code>ot</code>, <code>fe'l</code>, <code>sifat</code>, <code>olmosh</code>\n"
+    "• kun oralig'i — <code>1-10</code>, <code>45</code> («100 kun qoidasi» bo'yicha, 1-100)"
+)
+
+
+async def _parse_group_from_args(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """context.args'dan filtr o'qiydi. Noto'g'ri bo'lsa xato yozadi va None qaytaradi."""
+    if not context.args:
+        return "", None, None, None
+    arg = " ".join(context.args)
+    try:
+        pos, day_from, day_to = _parse_group_arg(arg)
+    except ValueError:
+        await update.effective_chat.send_message(GROUP_ARG_HELP, parse_mode=ParseMode.HTML)
+        return None
+    label = _pos_uz(pos) if pos else f"{day_from}-{day_to}-kun"
+    return f" ({label})", pos, day_from, day_to
+
+
 async def cmd_flashcard(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     user = update.effective_user
     db.ensure_user(user.id, user.username, user.first_name)
-    session = _start_session(context, user.id, "flashcard")
+    parsed = await _parse_group_from_args(update, context)
+    if parsed is None:
+        return
+    label, pos, day_from, day_to = parsed
+    session = _start_session(context, user.id, "flashcard", pos, day_from, day_to)
     if session is None:
         await update.effective_chat.send_message(
-            "🎉 Hozircha takrorlash kerak bo'lgan so'z yo'q. Ertaga qaytib keling!"
+            f"🎉 Hozircha takrorlash kerak bo'lgan so'z yo'q{label}. Ertaga qaytib keling!"
         )
         return
     await _render_current(update, context)
@@ -285,10 +356,14 @@ async def cmd_flashcard(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
 async def cmd_test(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     user = update.effective_user
     db.ensure_user(user.id, user.username, user.first_name)
-    session = _start_session(context, user.id, "test")
+    parsed = await _parse_group_from_args(update, context)
+    if parsed is None:
+        return
+    label, pos, day_from, day_to = parsed
+    session = _start_session(context, user.id, "test", pos, day_from, day_to)
     if session is None:
         await update.effective_chat.send_message(
-            "🎉 Hozircha takrorlash kerak bo'lgan so'z yo'q. Ertaga qaytib keling!"
+            f"🎉 Hozircha takrorlash kerak bo'lgan so'z yo'q{label}. Ertaga qaytib keling!"
         )
         return
     await _render_current(update, context)
@@ -316,22 +391,37 @@ _STATE_UZ = {
 }
 
 
+def _group_table(rows: dict[str, dict[str, int]], row_label_width: int) -> str:
+    lines = [
+        f"{key.rjust(row_label_width)}  {v['started']}/{v['total']}"
+        for key, v in rows.items()
+    ]
+    return "<pre>" + "\n".join(lines) + "</pre>"
+
+
 async def cmd_stats(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     user = update.effective_user
     db.ensure_user(user.id, user.username, user.first_name)
     s = db.get_stats(user.id)
+    g = db.get_group_stats(user.id)
     bars = "\n".join(
         f"  {label}: {'▮' * min(s['by_state'][key], 20) or '·'} {s['by_state'][key]}"
         for key, label in _STATE_UZ.items()
     )
+    pos_rows = {_pos_uz(k) if k != "?" else "boshqa": v for k, v in g["by_pos"].items()}
+    pos_table = _group_table(pos_rows, max(len(k) for k in pos_rows))
+    day_table = _group_table(g["by_day_block"], row_label_width=6)
     await update.effective_chat.send_message(
         f"📊 <b>Statistika</b>\n\n"
         f"So'zlar bazasi: {s['total_words']}\n"
         f"Boshlangan: {s['started']}\n"
         f"Uzoq muddatga o'zlashtirilgan: {s['mastered']}\n"
-        f"Bugun takrorlash: {s['due']}\n\n"
+        f"Navbatda (bugun uchun): {s['due']}\n\n"
         f"<b>FSRS holati</b>\n{bars}\n\n"
-        f"Javoblar: ✅ {s['correct']} / ❌ {s['wrong']}  (aniqlik {s['accuracy']}%)",
+        f"<b>So'z turkumi bo'yicha</b> (boshlangan/jami)\n{pos_table}\n\n"
+        f"<b>Kun bo'yicha</b> (boshlangan/jami)\n{day_table}\n\n"
+        f"Javoblar: ✅ {s['correct']} / ❌ {s['wrong']}  (aniqlik {s['accuracy']}%)\n\n"
+        f"💡 Guruh bo'yicha mashq: <code>/flashcard fe'l</code>, <code>/test 1-10</code>",
         parse_mode=ParseMode.HTML,
     )
 
